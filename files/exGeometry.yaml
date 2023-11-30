@@ -1,0 +1,66 @@
+header:
+  structureKey: system
+  componentsKey: components
+  configurationKey: configuration
+
+system[SiDetector]:
+  barrel1[Barrel1]:
+    stave1[Stave]: ~
+    stave2[Stave]: ~
+    stave3[Stave]: ~
+    stave4[Stave]: ~
+    stave5[Stave]: ~
+    stave6[Stave]: ~
+    stave7[Stave]: ~
+    stave8[Stave]: ~
+    stave9[Stave]: ~
+    stave10[Stave]: ~
+    stave11[Stave]: ~
+    stave12[Stave]: ~
+  barrel2[Barrel2]:
+    stave1[Stave]: ~
+    stave2[Stave]: ~
+    stave3[Stave]: ~
+    stave4[Stave]: ~
+    stave5[Stave]: ~
+    stave6[Stave]: ~
+    stave7[Stave]: ~
+    stave8[Stave]: ~
+    stave9[Stave]: ~
+    stave10[Stave]: ~
+    stave11[Stave]: ~
+    stave12[Stave]: ~
+    stave13[Stave]: ~
+    stave14[Stave]: ~
+    stave15[Stave]: ~
+    stave16[Stave]: ~
+
+components:
+  Stave:
+    modul1[Module]: ~
+    modul2[Module]: ~
+    modul3[Module]: ~
+    modul4[Module]: ~
+    modul5[Module]: ~
+    modul6[Module]: ~
+    modul7[Module]: ~
+    modul8[Module]: ~
+    modul9[Module]: ~
+    modul10[Module]: ~
+    modul11[Module]: ~
+    modul12[Module]: ~
+  Module: ~
+
+configuration:
+  Module:
+    gtype: 'pbox::Box'
+    lengths: 50.0, 50.0
+  Stave:
+    gtype: 'pbox::GeomHolder'
+  Stave.module1:
+    T: 0.0, 0.0
+    R: 1.0, 0.0, 0.0, 1.0
+  Stave.module2:
+    T: 0.0, 0.0
+    R: 1.0, 0.0, 0.0, 1.0
+    

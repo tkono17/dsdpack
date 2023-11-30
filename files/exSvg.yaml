@@ -1,0 +1,27 @@
+header:
+  structureKey: figure
+  componentsKey: components
+  configurationKey: configuration
+
+figure[svg]:
+  box[rect_1]:
+  line1[line_1]:
+  circle1[circle_1]:
+
+components: ~
+
+configuration:
+  SVG:
+    viewBox: 0, 0, 500, 500
+  rect_1:
+    type: rect
+  line_1:
+    type: line
+  circle_1:
+    type: circle
+    cx: 100
+    cy: 100
+    r:  200
+    stroke: ~
+    fill: ~
+    

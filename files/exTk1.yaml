@@ -1,0 +1,82 @@
+header:
+  type: Tkinter
+  documentKey: View
+  componentsKey: components
+  configurationKey: styles
+
+View[ttk.Frame]:
+  menuBar[tk.Menu,bar]:
+    File[tk.Menu,cascade]:
+      New[tk.Menu]: command
+      Open[tk.Menu]: command
+      Save[tk.Menu]: command
+    Help[tk.Menu,cascade]: ~
+  vSplit[ttk.PanedWindow,vsplit]:
+    topPanel[ttk.PanedWindow,hsplit]:
+      overviewPanel[ttk.Frame,overview]:
+        overviewTree[OverviewTree]: ~
+      mainPanel[ttk.Frame,fill]:
+        pathLabel[ttk.Label,path]: /
+        table[EntryTable]: ~
+        buttons[ttk.Frame,buttons]:
+          GoRight[ttk.Button,right]: '>'
+          GoLeft[ttk.Button,right]: '<'
+          Remove[ttk.Button,right]: ~
+          Add[ttk.Button,right]: ~
+          AddRow[ttk.Button,right]: ~
+    messagePanel[tk.Text,message]: ~
+
+components:
+  OverviewTree[ttk.Treeview]: ~
+  EntryTable[ttk.Treeview]: ~
+  ListTable[ttk.Treeview]: ~
+  EntryEditTable[ttk.Treeview]: ~
+
+styles:
+  ttk.Button,right:
+    pack:
+      side: tk.RIGHT
+      expand: False
+  ttk.Frame,fill:
+    pack:
+      fill: tk.BOTH
+      expand: True
+  ttk.PanedWindow,hsplit:
+    orient: tk.HORIZONTAL
+    pack:
+      fill: tk.BOTH
+      expand: True
+  ttk.PanedWindow,vsplit:
+    orient: tk.VERTICAL
+    pack:
+      fill: tk.BOTH
+      expand: True
+  ttk.Frame,overview:
+    pack:
+      fill: tk.BOTH
+      expand: True
+  tk.Text,message:
+    pack:
+      fill: tk.BOTH
+      expand: True
+  OverviewTree:
+    pack:
+      fill: tk.BOTH
+      expand: True
+  ttk.Label,path:
+    pack:
+      side: tk.TOP
+      fill: tk.X
+  ListTable:
+    pack:
+      fill: tk.BOTH
+      expand: True
+  EntryTable:
+    pack:
+      fill: tk.BOTH
+      expand: True
+  EntryEditTable:
+    pack:
+      fill: tk.BOTH
+      expand: True
+  

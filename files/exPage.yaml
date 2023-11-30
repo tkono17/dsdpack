@@ -1,0 +1,30 @@
+header:
+  structureKey: document
+  componentsKey: components
+  configurationKey: styles
+
+document[Page]:
+  title[Title]: A web page
+  menuBar[MenuBar]:
+    File[MenuCategory]:
+      Open[MenuItem]: ~
+      Close[MenuItem]: ~
+    Help[MenuCategory]:
+      About[MenuItem]: ~
+  contents[ContentPanel]:
+    toolPanel[ToolPanel]: ~
+    mainPanel[MainPanel]: ~
+    configPanel[ConfigPanel]: ~
+  footer[Footer]: ~
+  
+styles:
+  Title: ~
+  MenuBar: ~
+  MenuCategory: ~
+  MenuItem: ~
+  ContentPanel: ~
+  ToolPanel: ~
+  MainPanel: ~
+  ConfigPanel: ~
+  Footer: ~
+  
