@@ -28,7 +28,7 @@ def run(args):
         #gen = HtmlGenerator(model=data)
     if gen:
         gen.generator()
-    gen = dslot.GuiTkGenerator(data)
+    gen = dslot.GuiTk(data)
     gen.generate('a.py')
     pass
 

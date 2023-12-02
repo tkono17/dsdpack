@@ -1,6 +1,9 @@
 #------------------------------------------------------------------------
-# hdot.guitk: __init__.py
+# dslot: __init__.py
 #------------------------------------------------------------------------
-from .generator import GuiTk
-from .guiComponents import *
+from .model import *
+from .generator import *
+from .guitk import *
+#from .htmlcss import *
+#from .htmlcss import *
 

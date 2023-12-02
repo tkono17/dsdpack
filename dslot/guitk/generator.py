@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------
-# hdot: guitk.py
+# dslot: guitk.py
 #-----------------------------------------------------------------------
 import logging
 from ..model import Key, Node, ModelFile
@@ -7,7 +7,7 @@ from .guiComponents import ScrollableFrame, addScrollBars
 
 logger = logging.getLogger(__name__)
 
-class GuiTk:
+class GuiTkGenerator:
     def __init__(self, modelFile):
         self.modelFile = modelFile
         self.topComponentType = ''
@@ -159,7 +159,7 @@ class GuiTk:
         if xscroll or yscroll:
             fout.write(f'{prefix}{parentName}.rowconfigure(0, weight=1)\n')
             fout.write(f'{prefix}{parentName}.columnconfigure(0, weight=1)\n')
-            fout.write(f'{prefix}hdot.addScrollBars({component.name}, {parentName}, True, True)\n')
+            fout.write(f'{prefix}dslot.addScrollBars({component.name}, {parentName}, True, True)\n')
             
     def writeSubComponents(self, fout, component, parentName, prefix):
         ckeys = component.keys()
@@ -245,7 +245,7 @@ class GuiTk:
             # Python imports
             fout.write('import tkinter as tk\n')
             fout.write('from tkinter import ttk\n')
-            fout.write('import hdot\n')
+            fout.write('import dslot\n')
             fout.write('\n')
             
             # Components

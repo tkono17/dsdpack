@@ -1,8 +1,8 @@
 #------------------------------------------------------------------------
-# hdot: CMakeLists.txt
+# dslot: CMakeLists.txt
 #------------------------------------------------------------------------
 cmake_minimum_required(VERSION 3.0)
-set(PROJECT_NAME hdot)
+set(PROJECT_NAME dslot)
 
 project(${PROJECT_NAME})
 set(${PROJECT_NAME} VERSION MAJOR 1)
@@ -11,17 +11,43 @@ set(DESTINATION $ENV{SWDIR})
 
 set(CMAKE_INSTALL_PREFIX ${DESTINATION})
 
-set(progs
+set(scriptfiles
   scripts/sddgen.py
-  scripts/sddtest1.py)
+  scripts/dslotgen.py)
 
 # Installation
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/hdot
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/dslot
   DESTINATION python
   FILES_MATCHING PATTERN "*.py"
   )
 
-foreach(prog ${progs})
+foreach(prog ${scriptfiles})
   install(PROGRAMS ${prog} DESTINATION bin)
 endforeach()
+
+# Packaging
+find_program(PYTHON python3)
+if (PYTHON)
+  set(setupfiles setup.py setup.cfg)
+
+  file(GLOB_RECURSE pyfiles RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} dslot/*.py)
+  foreach(pyfile ${pyfiles} ${setupfiles} ${scriptfiles})
+    get_filename_component(dn ${pyfile} DIRECTORY)
+    file(COPY ${pyfile} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/${dn})
+  endforeach()
+
+  # Get version from setup.cfg and set SDIST
+  set(cmd "grep version setup.cfg | sed 's/.*=//g' | sed 's/ //g'")
+  execute_process(COMMAND bash -c ${cmd} OUTPUT_VARIABLE version
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+  set(SDIST dist/dslot-${version}.tar.gz)
+  
+  set(DEPS ${setupfiles} ${scriptfiles} ${pyfiles})
+  add_custom_command(OUTPUT ${SDIST}
+    COMMAND ${PYTHON}
+    ARGS setup.py sdist
+    DEPENDS ${DEPS})
+  add_custom_target(sdist DEPENDS ${SDIST})
+
+endif()
 

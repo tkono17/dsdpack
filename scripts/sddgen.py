@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 #------------------------------------------------------------------------
-# structdd: sddgen.py
+# dslot: sddgen.py
 #------------------------------------------------------------------------
 
 import yaml
 import json
 import argparse
 import logging
-import structdd
+import dslot
 
 logger = logging.getLogger(__name__)
 
@@ -42,15 +42,15 @@ def run(args):
     gen = None
     dtype = 'NOT_SPECIFIED'
     with open(args.inputFile, 'r') as f:
-        data = structdd.Model(args.inputFile)
+        data = dslot.Model(args.inputFile)
         data.load()
         dtype = data.header.documentType
         logger.info(f'dtype = {dtype}')
         if dtype == 'HTML+CSS':
             logger.info('HTML+CSS generator')
-            gen = structdd.HtmlGenerator(model=data)
+            gen = dslot.HtmlGenerator(model=data)
         elif dtype == 'Tkinter':
-            gen = structdd.TkGenerator(model=data)
+            gen = dslot.TkGenerator(model=data)
     if gen:
         logger.info(f'Generate output dtype={dtype}')
         gen.filenameIn = args.inputFile
