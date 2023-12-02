@@ -1,4 +1,7 @@
-# DSlot: A package to allow consice description of structured data
+# DSlot
+
+## About the package
+This package allows consice descriptions of structured data. It allows one to embed tags and options to each node of the tree-like structure which are interpreted by the application. Tags and options are embeded in the keys when written in JSON and YAML formats, while they are specified as attributes in the XML format.
 
 ## Motivation
 This package defines a simple text format to describe structured data. The motivation comes from describing the document layouts of 
