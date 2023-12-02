@@ -36,6 +36,7 @@ if (PYTHON)
     file(COPY ${pyfile} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/${dn})
   endforeach()
 
+  # Target: sdist
   # Get version from setup.cfg and set SDIST
   set(cmd "grep version setup.cfg | sed 's/.*=//g' | sed 's/ //g'")
   execute_process(COMMAND bash -c ${cmd} OUTPUT_VARIABLE version
@@ -49,5 +50,14 @@ if (PYTHON)
     DEPENDS ${DEPS})
   add_custom_target(sdist DEPENDS ${SDIST})
 
+  # Target: pypi
+  add_custom_target(pypi DEPENDS ${SDIST})
+
+  # Target: testpypi
+  add_custom_command(OUTPUT testpypi1
+    COMMAND ${PYTHON}
+    ARGS -m twine upload --repository testpypi ${SDIST}
+    DEPENDS ${SDIST})
+  add_custom_target(testpypi DEPENDS testpypi1 ${SDIST})
 endif()
 
