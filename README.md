@@ -1,4 +1,4 @@
-# Structdd: Structured data description
+# DSlot: A package to allow consice description of structured data
 
 ## Motivation
 This package defines a simple text format to describe structured data. The motivation comes from describing the document layouts of 
@@ -44,7 +44,6 @@ these descriptions. There are several forseen targets as listed below.
 
 | Target | Description |
 | ------ | ----------- |
-| HTML+CSS | HTML+CSS files |
-| React | Files for React application |
 | Tkinter | Tkinter GUI layout |
+| HTML+CSS | HTML+CSS files |
 | Cgeom | Geometry package (private) |
