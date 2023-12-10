@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------
-# dslot.guitk: guiComponents.py
+# dsdpack.guitk: guiComponents.py
 #------------------------------------------------------------------------
 import time
 import logging
