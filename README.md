@@ -1,4 +1,4 @@
-# DSlot
+# DSD package
 
 ## About the package
 This package allows consice descriptions of structured data. It allows one to embed tags and options to each node of the tree-like structure which are interpreted by the application. Tags and options are embeded in the keys when written in JSON and YAML formats, while they are specified as attributes in the XML format.
