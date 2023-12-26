@@ -119,6 +119,7 @@ class GuiTkGenerator:
         args = self.buildInitArgs(component, style)
         logger.info(f'{component.name} to instanciate')
         fout.write(f'{prefix}{component.name} = {clsname}({parentName}{args})\n')
+        fout.write(f'{prefix}self.{component.name} = {component.name}\n')
 
     def writeMenuBar(self, fout, menuBar, prefix):
         name = 'menuBar'
@@ -127,6 +128,7 @@ class GuiTkGenerator:
         fout.write(f'{prefix}root = self.master.master\n')
         fout.write(f'{prefix}menuBar = self\n')
         fout.write(f'{prefix}root.config(menu=self)\n')
+        fout.write(f'{prefix}self.menuBar = menuBar\n')
 
     def writeMenu(self, fout, menu, parentName, prefix):
         name = menu.name
@@ -142,6 +144,7 @@ class GuiTkGenerator:
             parentName = self.menuStack[-1]
             fout.write(f'{prefix}{name} = {clsname}({parentName}, tearoff=False)\n')
             fout.write(f'{prefix}{parentName}.add_command(label="{name}")\n')
+        fout.write(f'{prefix}self.{name} = {name}\n')
 
     def checkScrollBars(self, fout, component, parentName, style, prefix):
         xscroll, yscroll = False, False

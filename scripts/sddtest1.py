@@ -3,7 +3,7 @@
 import os
 import argparse
 import logging
-import dslot
+import dsdpack
 
 logger = logging.getLogger(__name__)
 
@@ -17,7 +17,7 @@ def parseArgs():
 def run(args):
     data = None
     if os.path.exists(args.inputFile):
-        data = dslot.ModelFile(args.inputFile)
+        data = dsdpack.ModelFile(args.inputFile)
         data.load()
     gen = None
     if data:
@@ -28,7 +28,7 @@ def run(args):
         #gen = HtmlGenerator(model=data)
     if gen:
         gen.generator()
-    gen = dslot.GuiTkGenerator(data)
+    gen = dsdpack.GuiTkGenerator(data)
     gen.generate('a.py')
     pass
 
