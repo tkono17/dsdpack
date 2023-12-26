@@ -1,8 +1,8 @@
 #------------------------------------------------------------------------
-# dsdpack: CMakeLists.txt
+# sddgen: CMakeLists.txt
 #------------------------------------------------------------------------
 cmake_minimum_required(VERSION 3.0)
-set(PROJECT_NAME dsdpack)
+set(PROJECT_NAME sddgen)
 
 project(${PROJECT_NAME})
 set(${PROJECT_NAME} VERSION MAJOR 1)
@@ -12,10 +12,10 @@ set(DESTINATION $ENV{SWDIR})
 set(CMAKE_INSTALL_PREFIX ${DESTINATION})
 
 set(scriptfiles
-  scripts/dsdgen.py)
+  scripts/sddgenerate.py)
 
 # Installation
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/dsdpack
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/sddgen
   DESTINATION python
   FILES_MATCHING PATTERN "*.py"
   )
@@ -29,7 +29,7 @@ find_program(PYTHON python3)
 if (PYTHON)
   set(setupfiles setup.py setup.cfg)
 
-  file(GLOB_RECURSE pyfiles RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} dsdpack/*.py)
+  file(GLOB_RECURSE pyfiles RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} sddgen/*.py)
   foreach(pyfile ${pyfiles} ${setupfiles} ${scriptfiles})
     get_filename_component(dn ${pyfile} DIRECTORY)
     file(COPY ${pyfile} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/${dn})
@@ -40,7 +40,7 @@ if (PYTHON)
   set(cmd "grep version setup.cfg | sed 's/.*=//g' | sed 's/ //g'")
   execute_process(COMMAND bash -c ${cmd} OUTPUT_VARIABLE version
     OUTPUT_STRIP_TRAILING_WHITESPACE)
-  set(SDIST dist/dsdpack-${version}.tar.gz)
+  set(SDIST dist/sddgen-${version}.tar.gz)
   
   set(DEPS ${setupfiles} ${scriptfiles} ${pyfiles})
   add_custom_command(OUTPUT ${SDIST}

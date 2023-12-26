@@ -1,5 +1,5 @@
 #-----------------------------------------------------------------------
-# dsdpack: guitk.py
+# sddgen: guitk.py
 #-----------------------------------------------------------------------
 import logging
 from ..model import Key, Node, ModelFile
@@ -162,7 +162,7 @@ class GuiTkGenerator:
         if xscroll or yscroll:
             fout.write(f'{prefix}{parentName}.rowconfigure(0, weight=1)\n')
             fout.write(f'{prefix}{parentName}.columnconfigure(0, weight=1)\n')
-            fout.write(f'{prefix}dsdpack.addScrollBars({component.name}, {parentName}, True, True)\n')
+            fout.write(f'{prefix}sddgen.addScrollBars({component.name}, {parentName}, True, True)\n')
             
     def writeSubComponents(self, fout, component, parentName, prefix):
         ckeys = component.keys()
@@ -248,7 +248,7 @@ class GuiTkGenerator:
             # Python imports
             fout.write('import tkinter as tk\n')
             fout.write('from tkinter import ttk\n')
-            fout.write('import dsdpack\n')
+            fout.write('import sddgen\n')
             fout.write('\n')
             
             # Components

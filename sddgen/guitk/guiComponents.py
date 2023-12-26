@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------
-# dsdpack.guitk: guiComponents.py
+# sddgen.guitk: guiComponents.py
 #------------------------------------------------------------------------
 import time
 import logging

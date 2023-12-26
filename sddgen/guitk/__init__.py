@@ -1,9 +1,6 @@
 #------------------------------------------------------------------------
-# dsdpack: __init__.py
+# sddgen.guitk: __init__.py
 #------------------------------------------------------------------------
-from .model import *
-from .generator import *
-from .guitk import *
-#from .htmlcss import *
-#from .htmlcss import *
+from .generator import GuiTkGenerator
+from .guiComponents import *
 
