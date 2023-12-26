@@ -1,4 +1,4 @@
-# DSD package
+# Structured data description and generation
 
 ## About the package
 This package allows consice descriptions of structured data. It allows one to embed tags and options to each node of the tree-like structure which are interpreted by the application. Tags and options are embeded in the keys when written in JSON and YAML formats, while they are specified as attributes in the XML format.
@@ -14,7 +14,7 @@ The description is has 3 parts:
 * Structure
   * This part describes the structure of the document or the system.
   * The basic element composing the entire structure is called an element which has a name and an associated type.
-  * The name and type of an element are described as the key in the Yaml file like "name[Type]".
+  * The name and type of an element are described as the key in the Yaml file like "name[options]{tags}".
 * Components
   * A component is meant to define a type, similar to a class in object-oriented programming languages. 
   * This part contains components which can be reused as part of the structure.
