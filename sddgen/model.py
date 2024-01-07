@@ -249,7 +249,7 @@ class Header(Node):
         #
         self.name = ''
         self.version = ''
-        self.documentType = ''
+        self.modelType = ''
         self.author = ''
         self.date = None
         self.setHeader(data)
@@ -260,8 +260,8 @@ class Header(Node):
             self.name = headerData['name']
         if 'version' in keys:
             self.version = headerData['version']
-        if 'documentType' in keys:
-            self.documentType = headerData['documentType']
+        if 'modelType' in keys:
+            self.modelType = headerData['modelType']
         if 'author' in keys:
             self.author = headerData['author']
         if 'date' in keys:

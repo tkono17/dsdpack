@@ -135,16 +135,16 @@ class GuiTkGenerator:
         clsname = menu.tags[0]
         logger.info(f'{name} N={len(self.menuStack)}')
         if len(self.menuStack) == 0:
+            fout.write(f'{prefix}self.{name} = {name}\n')
             pass
         elif len(self.menuStack) == 1:
             parentName = self.menuStack[-1]
             fout.write(f'{prefix}{name} = {clsname}({parentName}, tearoff=False)\n')
-            fout.write(f'{prefix}{parentName}.add_cascade(label="{name}")\n')
+            fout.write(f'{prefix}{parentName}.add_cascade(label="{name}", menu={name})\n')
+            fout.write(f'{prefix}self.{name} = {name}\n')
         else:
             parentName = self.menuStack[-1]
-            fout.write(f'{prefix}{name} = {clsname}({parentName}, tearoff=False)\n')
             fout.write(f'{prefix}{parentName}.add_command(label="{name}")\n')
-        fout.write(f'{prefix}self.{name} = {name}\n')
 
     def checkScrollBars(self, fout, component, parentName, style, prefix):
         xscroll, yscroll = False, False
@@ -162,7 +162,7 @@ class GuiTkGenerator:
         if xscroll or yscroll:
             fout.write(f'{prefix}{parentName}.rowconfigure(0, weight=1)\n')
             fout.write(f'{prefix}{parentName}.columnconfigure(0, weight=1)\n')
-            fout.write(f'{prefix}sddgen.addScrollBars({component.name}, {parentName}, True, True)\n')
+            fout.write(f'{prefix}sddgen.guitk.addScrollBars({component.name}, {parentName}, True, True)\n')
             
     def writeSubComponents(self, fout, component, parentName, prefix):
         ckeys = component.keys()
@@ -249,6 +249,7 @@ class GuiTkGenerator:
             fout.write('import tkinter as tk\n')
             fout.write('from tkinter import ttk\n')
             fout.write('import sddgen\n')
+            fout.write('from .guiComponents import *\n')
             fout.write('\n')
             
             # Components

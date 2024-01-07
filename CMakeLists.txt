@@ -12,7 +12,7 @@ set(DESTINATION $ENV{SWDIR})
 set(CMAKE_INSTALL_PREFIX ${DESTINATION})
 
 set(scriptfiles
-  scripts/sddgenerate.py)
+  scripts/sdd_gen.py)
 
 # Installation
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/sddgen

@@ -30,112 +30,6 @@ def addScrollBars(widget, parent, xscroll=False, yscroll=False, layout='grid'):
     return (xscrollbar, yscrollbar)
 
 #------------------------------------------------------------------------
-# FieldEntryPanel
-#------------------------------------------------------------------------
-class FieldEntryPanel(ttk.Frame):
-    def __init__(self, parent, name, value):
-        super().__init__(parent)
-        self.name = name
-        self.value = value
-        self.build()
-        
-    def build(self):
-        x1 = ttk.Label(self, text=self.name, width=15)
-        x2 = ttk.Entry(self, text=self.value)
-        x1.pack(side=tk.LEFT)
-        x2.pack(side=tk.LEFT, fill=tk.X, expand=True)
-    pass
-
-class FieldEntry:
-    def __init__(self, name, value):
-        self.name = name
-        self.value = value
-    def createVar(self):
-        x = tk.StringVar()
-        if type(self.value) == type(''):
-            x = tk.StringVar(value=self.value)
-        elif type(self.value) == type(1):
-            x = tk.IntVar(value=self.value)
-        elif type(self.value) == type(1.0):
-            x = tk.DoubleVar(value=self.value)
-        return x
-    
-#------------------------------------------------------------------------
-# EntryButtonPanel
-#------------------------------------------------------------------------
-class EntryButtonPanel(ttk.Frame):
-    def __init__(self, parent, buttonText):
-        super().__init__(parent)
-        self.buttonText = buttonText
-        self.build()
-        
-    def build(self):
-        entry = ttk.Entry(self)
-        button = ttk.Button(self, self.buttonText, width=20)
-        entry.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-        button.pack(side=tk.LEFT)
-        pass
-    pass
-
-class ComboEntryPanel(ttk.Frame):
-    def __init__(self, parent, text):
-        super().__init__(parent)
-        self.build(text)
-        
-    def build(self, text):
-        cbox = ttk.Combobox(self, width=20)
-        entry = ttk.Entry(self, text)
-        cbox.pack(side=tk.LEFT)
-        entry.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-        self.comboBox = cbox
-        self.entry = entry
-        pass
-    pass
-
-class ParameterGridFrame(ttk.Frame):
-    def __init__(self, parent):
-        super().__init__(parent, style='panel.TFrame')
-        self.fields = []
-        self.fieldVars = {}
-        self.grid_columnconfigure(0, weight=1)
-        self.grid_columnconfigure(1, weight=1)
-        self.grid_columnconfigure(2, weight=1)
-        
-    def setFields(self, v):
-        self.clear()
-        self.fields = v
-        self.build()
-
-    def addField(self, field):
-        self.fields.append(field)
-
-    def build(self):
-        n = len(self.fields)
-        c1 = ttk.Label(self, text='Field')
-        c2 = ttk.Label(self, text='Value')
-        c3 = ttk.Label(self, text='Scale')
-        c1.grid(row=0, column=0, sticky=tk.EW)
-        c2.grid(row=0, column=1, sticky=tk.EW)
-        c3.grid(row=0, column=2, sticky=tk.EW)
-        for i, field in enumerate(self.fields):
-            irow = i + 1
-            valuestr = field.createVar()
-            self.fieldVars[field.name] = valuestr
-            label = ttk.Label(self, text=field.name)
-            value = ttk.Entry(self, textvariable=valuestr)
-            print(f'{field.name}, {field.value}')
-            slider = ttk.Scale(self, from_=0, to=100, orient=tk.HORIZONTAL)
-            label.grid(row=irow, column=0, sticky=tk.EW)
-            value.grid(row=irow, column=1, sticky=tk.EW)
-            slider.grid(row=irow, column=2, sticky=tk.EW)
-
-    def clear(self):
-        self.fields.clear()
-        self.fieldVars.clear()
-        for x in self.winfo_children():
-            x.destroy()
-        
-#------------------------------------------------------------------------
 # AnalysisPanel
 #------------------------------------------------------------------------
 class AnalysisPanel(ttk.LabelFrame):
@@ -165,7 +59,7 @@ class AnalysisPanel(ttk.LabelFrame):
         columns = ('parameter', 'value')
         fields = [FieldEntry('p1', 0.0),
                   FieldEntry('p2', 'hello')]
-        self.propertiesFrame = ParameterGridFrame(self.properties)
+        self.propertiesFrame = PropertyGridFrame(self.properties)
         self.propertiesFrame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         #addScrollBars(self.propertiesFrame, self.properties, True, True)
         self.propertiesFrame.setFields(fields)
@@ -194,7 +88,6 @@ class ImageControlPanel(ttk.Frame):
                     text = self.analysis.inputImages[i].name
                 x = ComboEntryPanel(self, text)
                 x.pack(anchor=tk.NW, fill=tk.X)#, expand=True)
-                print('Add combobox')
                 self.comboEntries.append(x)
         for k, v in self.analysis.parameters.items():
             x1 = FieldEntryPanel(self, k, str(v))
@@ -236,15 +129,19 @@ class ScrollableFrame(ttk.Frame):
         cw = widget.winfo_width()
         ch = widget.winfo_height()
         logger.info(f'widget {widget} w/h = ({cw}, {ch})')
-        
+
+    def clear(self):
+        for x in self.frame.winfo_children():
+            x.destroy()
+            
     def frame(self):
         return self.frame
 
     pass
         
 class GalleryPanel(ScrollableFrame):
-    def __init__(self, parent):
-        super().__init__(parent)
+    def __init__(self, parent, *args, **kwargs):
+        super().__init__(parent, *args, **kwargs)
 
     def addImageFrame(self, image, title=''):
         frame = ttk.Frame(self.frame)

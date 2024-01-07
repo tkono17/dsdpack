@@ -2,12 +2,11 @@
 #------------------------------------------------------------------------
 # dslot: sddgen.py
 #------------------------------------------------------------------------
-
 import yaml
 import json
 import argparse
 import logging
-import dslot
+import sddgen
 
 logger = logging.getLogger(__name__)
 
@@ -42,19 +41,20 @@ def run(args):
     gen = None
     dtype = 'NOT_SPECIFIED'
     with open(args.inputFile, 'r') as f:
-        data = dslot.Model(args.inputFile)
+        print('ssgen = ', dir(sddgen))
+        data = sddgen.ModelFile(args.inputFile)
         data.load()
-        dtype = data.header.documentType
+        dtype = data.header.modelType
         logger.info(f'dtype = {dtype}')
         if dtype == 'HTML+CSS':
             logger.info('HTML+CSS generator')
-            gen = dslot.HtmlGenerator(model=data)
+            gen = sddgen.HtmlGenerator(modelFile=data)
         elif dtype == 'Tkinter':
-            gen = dslot.TkGenerator(model=data)
+            gen = sddgen.GuiTkGenerator(modelFile=data)
     if gen:
         logger.info(f'Generate output dtype={dtype}')
         gen.filenameIn = args.inputFile
-        gen.generate()
+        gen.generate(args.outputFile)
         #print(json.dumps(data, indent=2))
     else:
         logger.error(f'No generator found for data type {dtype}')
